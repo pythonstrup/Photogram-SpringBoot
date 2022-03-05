@@ -1,10 +1,20 @@
 # 포토그램 - 인스타그램 클론 코딩
 
-### STS 툴 버그가 발견되었습니다.
-- 아래 주소로 가서 4.0.6 버전으로 설치해주세요. 아니면 의존성 다운로드 79프로에서 무한루프가 발생합니다.
+### 이지업 강의 SNS 프로젝트
+
+- 강의주소
+- https://www.easyupclass.com/course/218/about
+
+- 깃허브 주소
+- https://github.com/codingspecialist/EaszUp-Springboot-Photogram-Start
+
+### STS 툴 버그 주의 4.13버전이 아닌 4.11버전 다운로드
+
+- Version: 4.11.0.RELEASE
 - https://github.com/spring-projects/sts4/wiki/Previous-Versions
 
 ### STS 툴에 세팅하기 - 플러그인 설정
+
 - https://blog.naver.com/getinthere/222322821611
 
 ### 의존성
@@ -56,19 +66,19 @@ server:
     encoding:
       charset: utf-8
       enabled: true
-    
+
 spring:
   mvc:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
-      
+
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://localhost:3306/cos?serverTimezone=Asia/Seoul
     username: cos
     password: cos1234
-    
+
   jpa:
     open-in-view: true
     hibernate:
@@ -76,7 +86,7 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
-      
+
   servlet:
     multipart:
       enabled: true
@@ -85,7 +95,7 @@ spring:
   security:
     user:
       name: test
-      password: 1234   
+      password: 1234
 
 file:
   path: C:/src/springbootwork-sts/upload/

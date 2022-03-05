@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.cos.photogramstart.domain.user.User;
+import com.cos.photogramstart.handler.ex.CustomValidationException;
 import com.cos.photogramstart.service.AuthService;
 import com.cos.photogramstart.web.dto.auth.SignupDto;
 
@@ -42,17 +43,17 @@ public class AuthController {
 			
 			for (FieldError error: bindingResult.getFieldErrors()) {
 				errorMap.put(error.getField(), error.getDefaultMessage());
-				System.out.println("==============================================");
-				System.out.println(error.getDefaultMessage());
-				System.out.println("==============================================");
 			}
+			
+			throw new CustomValidationException("유효성 검사 실패", errorMap);
+		} else {
+			// User <- SignupDto
+			User user = signupDto.toEntity();
+			User userEntity = authService.회원가입(user);
+			System.out.println(userEntity);
+			
+			return "auth/signin";
 		}
 		
-		// User <- SignupDto
-		User user = signupDto.toEntity();
-		User userEntity = authService.회원가입(user);
-		System.out.println(userEntity);
-		
-		return "auth/signin";
 	}
 }
