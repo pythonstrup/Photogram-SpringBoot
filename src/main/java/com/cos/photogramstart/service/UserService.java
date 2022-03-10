@@ -6,7 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.domain.user.UserRepository;
+import com.cos.photogramstart.handler.ex.CustomException;
 import com.cos.photogramstart.handler.ex.CustomValidationApiException;
+import com.cos.photogramstart.web.dto.user.UserProfileDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,6 +18,23 @@ public class UserService {
 
 	private final UserRepository userRepository;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	// 아래 작업을 한 단위로 묶어 RollBack과 Commit이 한꺼번에 일어나도록 한다.(원자성)
+	@Transactional(readOnly = true)
+	public UserProfileDto 회원프로필(int pageUserId, int principalId) {
+		UserProfileDto dto = new UserProfileDto();
+		
+		// SELECT * FROM image WHERE userId =: userId;
+		User userEntity = userRepository.findById(pageUserId).orElseThrow(()->{
+			throw new CustomException("해당 프로필 페이지는 없는 페이지 입니다.");
+		});
+		
+		dto.setUser(userEntity);
+		dto.setPageOwnerState(pageUserId == principalId); // 1은 페이지 주인, -1은 주인 아님.
+		dto.setImageCount(userEntity.getImages().size());
+		
+		return dto;
+	}
 	
 	@Transactional
 	public User 회원수정(int id, User user) {
