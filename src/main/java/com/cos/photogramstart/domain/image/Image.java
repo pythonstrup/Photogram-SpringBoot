@@ -10,9 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.PrePersist;
 import javax.persistence.Transient;
 
+import com.cos.photogramstart.domain.comment.Comment;
 import com.cos.photogramstart.domain.likes.Likes;
 import com.cos.photogramstart.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -53,7 +55,11 @@ public class Image {
 	@Transient
 	private int likeCount;
 	
-	// 댓글
+	// 댓글 - 양방향 매핑
+	@OrderBy("id DESC") // order by 걸기(내림차순으로)
+	@JsonIgnoreProperties({"image"})
+	@OneToMany(mappedBy="image") // 연관관계의 주인은 image, 디폴트는 lazy 전략
+	private List<Comment> comments;
 	
 	private LocalDateTime createDate;
 	
