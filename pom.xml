@@ -18,6 +18,13 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
+	
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-aop</artifactId>
+		    <version>2.6.4</version>
+		</dependency>
 
 		<!-- qlrm -->
 		<!-- 데이터베이스에서 쿼리 실행 결과(Query Result)를 매핑해주는 라이브러리 -->
