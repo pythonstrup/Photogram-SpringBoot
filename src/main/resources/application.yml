@@ -35,6 +35,12 @@ spring:
     user:
       name: test
       password: 1234  
+          oauth2:      client:        registration:          facebook:
+            client-id: 548695239775075
+            client-secret: 4ed9d7043656558f33ef1deac2bbf635
+            scope:
+            - public_profile
+            - email
 
 file:
   path: D:/bigbell/sts-workspace/upload/
